@@ -79,6 +79,7 @@ let intervalId = setInterval(addTimer, 1000);
 
 const timer = document.getElementById("timer");
 timer.textContent = "00:00:" + timer.textContent;
+card.style.width = '410px';
 
 function addTimer () {
     let arr = (timer.textContent).split(':');

@@ -3,6 +3,12 @@ const lostCounter = document.getElementById("lost");
 
 getHole = index => document.getElementById(`hole${index}`);
 
+function showMessage (text) {
+    alert(text);
+    deadCounter.textContent = 0;
+    lostCounter.textContent = 0;
+}
+
 for (let index = 1; index < 10; index++) {
     let hole = getHole(index);
 
@@ -13,17 +19,13 @@ for (let index = 1; index < 10; index++) {
             deadCounter.textContent = Number(deadCounter.textContent) + 1;
             
             if (Number(deadCounter.textContent) > 9) {
-                alert('Поздравляем с победой!');
-                deadCounter.textContent = 0;
-                lostCounter.textContent = 0;
+                showMessage('Поздравляем с победой!');
             }
         } else {
             lostCounter.textContent = Number(lostCounter.textContent) + 1;
 
             if (Number(lostCounter.textContent) > 4) {
-                alert('Увы, проигрыш. Попробуйте еще!');
-                deadCounter.textContent = 0;
-                lostCounter.textContent = 0;
+                showMessage('Увы, проигрыш. Попробуйте еще!');
             }
         }
     }
