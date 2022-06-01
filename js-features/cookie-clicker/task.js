@@ -28,7 +28,7 @@ imageCookie.onclick = function() {
     } else {
        let end = Date.now();
        let elapsed = (end - start)/1000;
-       clickRate.textContent = (elapsed/clickerCounter.textContent).toFixed(2);
+       clickRate.textContent = (clickerCounter.textContent/elapsed).toFixed(2);
     }
 
     if (imageCookie.width === 200) {
