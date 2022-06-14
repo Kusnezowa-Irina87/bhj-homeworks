@@ -52,19 +52,29 @@ console.log('массив ' + listItem);
 function registerСlick(item) {
     item.onclick = function() {
         let closeMenu = item.nextElementSibling;
-
+        // у нажатого элемента ищем соседнее меню 
         listItem.forEach(elem => {
+        // через цикл проверяем список ссылок
             if (elem === item) {
+                alert('Сейчас работаем с нажатым элементом');
+            // если нажатый элемент равен проверяемому, то
                 if (closeMenu) {
+                // если у нажатого элемента есть соседнее меню
                     if (closeMenu.className.includes('menu_active')) {
+                    // то проверим, если это меню открыто, то закрыть
                         closeMenu.classList.remove('menu_active');
                     } else {
+                    // иначе открыть нажатое меню
                         closeMenu.classList.add('menu_active');
                     }
-                    return false;
+                    // в любом случае запретить переход по ссылке
                 }
+                return false;
             } else {
+            // если нажатый элемент НЕ равен проверяемому, то ищем у проверяемого соседнее меню
+                alert('Сейчас работаем с НЕнажатым элементом');
                 let elemSibling = elem.nextElementSibling;
+                // если меню есть, то закрыть его
                 if (elemSibling) {
                     if (elemSibling.className.includes('menu_active')) {
                         elemSibling.classList.remove('menu_active');
