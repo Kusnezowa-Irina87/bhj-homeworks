@@ -46,43 +46,66 @@ listItem.forEach(item => registerСlick(item)); */
 
 // Сложный уровень
 
-const listItem = Array.from(document.querySelectorAll('ul.menu_main>li.menu__item>a.menu__link'));
-console.log('массив ' + listItem);
+// const listItem = Array.from(document.querySelectorAll('ul.menu_main>li.menu__item>a.menu__link'));
 
-function registerСlick(item) {
+/* function closeElem(elem) {
+    if (elem.className.includes('menu_active')) {
+        elem.classList.remove('menu_active');
+    }
+} */
+// почему не сработала функция closeElem(elem)?
+
+/* function registerСlick(item) {
     item.onclick = function() {
         let closeMenu = item.nextElementSibling;
-        // у нажатого элемента ищем соседнее меню 
         listItem.forEach(elem => {
-        // через цикл проверяем список ссылок
             if (elem === item) {
-                alert('Сейчас работаем с нажатым элементом');
-            // если нажатый элемент равен проверяемому, то
                 if (closeMenu) {
-                // если у нажатого элемента есть соседнее меню
                     if (closeMenu.className.includes('menu_active')) {
-                    // то проверим, если это меню открыто, то закрыть
                         closeMenu.classList.remove('menu_active');
+                    //closeElem(closeMenu);
                     } else {
-                    // иначе открыть нажатое меню
-                        closeMenu.classList.add('menu_active');
+                    closeMenu.classList.add('menu_active');
                     }
-                    // в любом случае запретить переход по ссылке
                 }
-                return false;
             } else {
-            // если нажатый элемент НЕ равен проверяемому, то ищем у проверяемого соседнее меню
-                alert('Сейчас работаем с НЕнажатым элементом');
                 let elemSibling = elem.nextElementSibling;
-                // если меню есть, то закрыть его
                 if (elemSibling) {
                     if (elemSibling.className.includes('menu_active')) {
                         elemSibling.classList.remove('menu_active');
                     }
+                    //closeElem(elemSibling);
                 }
             }
         });
+
+        if (closeMenu) {
+            return false;
+        }
     }
 }
 
-listItem.forEach(item => registerСlick(item));
+listItem.forEach(item => registerСlick(item)); */
+
+const activeMenuList = Array.from(document.querySelectorAll('ul.menu_sub'));
+
+function linkSearch(item) {
+    let parent = item.closest('.menu__item');
+    let closeLink = parent.querySelector('.menu__link');
+
+    closeLink.onclick = function() {
+        let activeElement = document.querySelector('.menu_active');
+        if (activeElement) {
+            activeElement.classList.remove('menu_active');
+        }
+
+        if (activeElement !== item) {
+            item.classList.add('menu_active');
+        }
+
+        return false;
+    }
+}
+
+activeMenuList.forEach(item => linkSearch(item));
+// исправила, спасибо. Я не догадалась о такой логике, искать сразу те элементы, с которыми и будем работать.

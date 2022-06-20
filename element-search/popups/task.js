@@ -1,4 +1,4 @@
-const modals = document.querySelectorAll('.modal');
+/* const modals = document.querySelectorAll('.modal');
 modals.item(0).classList.add("modal_active");
 // целесообразно ли здесь записывать переменную modal1 = modals.item(0) отдельно??? Или можно сразу по номеру элемента modals.item(0).classList.add("modal_active");???
 
@@ -25,4 +25,28 @@ closes.item(1).onclick =function() {
 } 
 buttons.item(1).onclick = function() {
     closePopup2(modals.item(1));
-} 
+}  */
+
+const firstMenu = document.getElementById('modal_main');
+firstMenu.classList.add("modal_active");
+
+const closes = Array.from(document.querySelectorAll('.modal__close_times'));
+const buttons = Array.from(document.querySelectorAll('.btn'));
+
+function close(item) {
+    let parent = item.closest('.modal');
+    parent.classList.remove("modal_active");
+}
+
+function closePopup(item) {
+    item.onclick = function() {
+        close(item);
+        if (item.className.includes('show-success')) {
+            let nexPopup = document.getElementById('modal_success');
+            nexPopup.classList.add("modal_active");
+        }
+    }
+}
+
+closes.forEach(item => closePopup(item));
+buttons.forEach(item => closePopup(item));
