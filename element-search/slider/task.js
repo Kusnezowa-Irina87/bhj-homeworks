@@ -1,4 +1,4 @@
-// подсказки преподавателя
+// подсказки om преподавателя
 const listImage = Array.from(document.querySelectorAll('div.slider__item'));
 const listSliderDot = Array.from(document.querySelectorAll('div.slider__dot'));
 listSliderDot[0].classList.add('slider__dot_active');

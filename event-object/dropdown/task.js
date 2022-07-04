@@ -24,7 +24,6 @@ function openList(item) {
     }
 }
 
-
 function changeText(item) {
     item.onclick = function() {
         let link = this.querySelector('.dropdown__link');

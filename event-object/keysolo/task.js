@@ -92,4 +92,3 @@ class Game {
 }
 
 new Game(document.getElementById('game'))
-

@@ -18,4 +18,4 @@ function linkSearch(item) {
     }
 }
 
-activeMenuList.forEach(item => linkSearch(item));
+activeMenuList.forEach(linkSearch);

@@ -1,4 +1,3 @@
-
 const firstMenu = document.getElementById('modal_main');
 firstMenu.classList.add("modal_active");
 
@@ -19,7 +18,6 @@ function closePopup(item) {
         }
     }
 }
-
 
 closes.forEach(closePopup);
 //closes.forEach(item => closePopup(item)); внутри функции выполняется подписка
