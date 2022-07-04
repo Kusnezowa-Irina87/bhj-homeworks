@@ -1,7 +1,7 @@
 .dropdown {
   list-style-type: none;
   padding: 0;
-  margin: 0;
+  margin: 10px;
   position: relative;
   font-family: Helvetica;
   font-weight: 300;
@@ -51,5 +51,18 @@
 }
 
 .card {
+  display: flex;
   text-align: center;
+}
+
+.list1 {
+  left: 7px;
+}
+
+.list2 {
+  left: 6px;
+}
+
+.list3 {
+  left: 7px;
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Задача 1
 
 /* const listSlider = Array.from(document.querySelectorAll('div.slider__arrow'));
@@ -87,6 +88,9 @@ listSliderDot.forEach(item => clickSlider(item)); */
 
 // Вариант преподавателя
 
+=======
+// подсказки om преподавателя
+>>>>>>> feuture/ff
 const listImage = Array.from(document.querySelectorAll('div.slider__item'));
 const listSliderDot = Array.from(document.querySelectorAll('div.slider__dot'));
 listSliderDot[0].classList.add('slider__dot_active');

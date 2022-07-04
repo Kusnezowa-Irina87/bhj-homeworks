@@ -107,5 +107,9 @@ function linkSearch(item) {
     }
 }
 
+<<<<<<< HEAD
 activeMenuList.forEach(item => linkSearch(item));
 // исправила, спасибо. Я не догадалась о такой логике, искать сразу те элементы, с которыми и будем работать.
+=======
+activeMenuList.forEach(linkSearch);
+>>>>>>> feuture/ff

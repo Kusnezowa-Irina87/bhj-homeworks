@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* const modals = document.querySelectorAll('.modal');
 modals.item(0).classList.add("modal_active");
 // целесообразно ли здесь записывать переменную modal1 = modals.item(0) отдельно??? Или можно сразу по номеру элемента modals.item(0).classList.add("modal_active");???
@@ -27,6 +28,8 @@ buttons.item(1).onclick = function() {
     closePopup2(modals.item(1));
 }  */
 
+=======
+>>>>>>> feuture/ff
 const firstMenu = document.getElementById('modal_main');
 firstMenu.classList.add("modal_active");
 
@@ -48,5 +51,11 @@ function closePopup(item) {
     }
 }
 
+<<<<<<< HEAD
 closes.forEach(item => closePopup(item));
 buttons.forEach(item => closePopup(item));
+=======
+closes.forEach(closePopup);
+//closes.forEach(item => closePopup(item)); внутри функции выполняется подписка
+buttons.forEach(closePopup);
+>>>>>>> feuture/ff
