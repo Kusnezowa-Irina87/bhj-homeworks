@@ -1,5 +1,6 @@
-const spanList = Array.from(document.querySelectorAll('.rotator__case'));
-let speed = 1000;
+// Задача 1
+
+/* const spanList = Array.from(document.querySelectorAll('.rotator__case'));
 
 function changeSpan() {
     let activeSpan = spanList.findIndex(item => item.classList.contains('rotator__case_active'));
@@ -11,11 +12,29 @@ function changeSpan() {
         activeSpan++;
     }
 
+    activeSpan = (activeSpan + 1) % spanList.length;
+
     spanList[activeSpan].classList.add('rotator__case_active');
     spanList[activeSpan].style.color = spanList[activeSpan].getAttribute('data-color');
-    return spanList[activeSpan].getAttribute('data-speed');
 }
 
-setInterval(() => speed = Number(changeSpan()), speed);
+setInterval(changeSpan, 1000); */
 
-// не поняла, как переписать значение speed из функции changeSpan в значение милисекунд setInterval
+// Задача 2
+
+const spanList = Array.from(document.querySelectorAll('.rotator__case'));
+let activeSpan = spanList.findIndex(item => item.classList.contains('rotator__case_active'));
+
+let speed = spanList[activeSpan].getAttribute('data-speed');
+
+let timerId = setTimeout(function changeSpan() {
+    activeSpan = spanList.findIndex(item => item.classList.contains('rotator__case_active'));
+    spanList[activeSpan].classList.remove('rotator__case_active');
+
+    activeSpan = (activeSpan + 1) % spanList.length;
+
+    spanList[activeSpan].classList.add('rotator__case_active');
+    spanList[activeSpan].style.color = spanList[activeSpan].getAttribute('data-color');
+    speed = spanList[activeSpan].getAttribute('data-speed');
+    timerId = setTimeout(changeSpan, speed);
+}, speed);

@@ -2,7 +2,7 @@ const fontSizeList = Array.from(document.querySelectorAll('a.font-size'));
 
 // Вариант решения 1
 
-function changeFontSize(elem) {
+/* function changeFontSize(elem) {
     elem.onclick = function() {
         if (!this.classList.contains('font-size_active')) {
             let activeElem = document.querySelector('.font-size_active');
@@ -11,24 +11,24 @@ function changeFontSize(elem) {
             this.classList.add('font-size_active');  
         }
 
-        let textBlock = this.closest('.book');
+        const textBlock = this.closest('.book');
 
-        if (textBlock.className !== "book") {
+        if (textBlock.className !== 'book') {
             textBlock.classList.remove('book_fs-big');
             textBlock.classList.remove('book_fs-small');
         }
         
-        if (this.getAttribute("data-size") === "small") {
+        if (this.getAttribute('data-size') === 'small') {
             textBlock.classList.add('book_fs-small');
         }
 
-        if (this.getAttribute("data-size") === "big") {
+        if (this.getAttribute('data-size') === 'big') {
             textBlock.classList.add('book_fs-big');
         }
 
-        return false;  
+        return false;
     }
-}
+} */
 
 // Вариант решения 2
 
@@ -42,19 +42,18 @@ function changeFontSize(elem) {
 
         this.classList.add('font-size_active');
 
-        let textBlock = this.closest('.book');
+        const textBlock = this.closest('.book');
 
-        if (textBlock.className !== "book") {
+        if (textBlock.className.includes('book_fs')) {
             textBlock.classList.remove('book_fs-big');
             textBlock.classList.remove('book_fs-small');
         }
-        //следует ли делать проверку на имеющиеся классы, или проще сразу удалять?
         
-        if (this.getAttribute("data-size") === "small") {
+        if (this.getAttribute('data-size') === 'small') {
             textBlock.classList.add('book_fs-small');
         }
 
-        if (this.getAttribute("data-size") === "big") {
+        if (this.getAttribute('data-size') === 'big') {
             textBlock.classList.add('book_fs-big');
         }
 
@@ -64,7 +63,7 @@ function changeFontSize(elem) {
 
 // Вариант решения 3 с addEventListener
 
-/* function changeFontSize(elem) {
+function changeFontSize(elem) {
     elem.addEventListener('click', function() {
         let activeElem = document.querySelector('.font-size_active');
     
@@ -74,13 +73,12 @@ function changeFontSize(elem) {
 
         elem.classList.add('font-size_active');
 
-        let textBlock = this.closest('.book');
+        const textBlock = this.closest('.book');
 
         if (textBlock.className !== "book") {
             textBlock.classList.remove('book_fs-big');
             textBlock.classList.remove('book_fs-small');
         }
-        //следует ли делать проверку на имеющиеся классы, или проще сразу удалять?
         
         if (this.getAttribute("data-size") === "small") {
             textBlock.classList.add('book_fs-small');
@@ -90,26 +88,46 @@ function changeFontSize(elem) {
             textBlock.classList.add('book_fs-big');
         }
 
-        return false;
+        elem.preventDefault();
+        //не работает с preventDefault(), идет перезагрузка страницы
     });
-} */
-// Почему в решении 3 не работает код с addEventListener? Только с onclick
+}
 
 fontSizeList.forEach(changeFontSize);
 
 const paretnColor = document.querySelector("div.book__control_color");
-const colorElemList = Array.from(document.querySelectorAll('a.color'));
+const colorElemList = Array.from(paretnColor.querySelectorAll('a.color'));
 
 function changeColor(elem) {
     elem.onclick = function() {
-        if (!this.classList.contains('color_active')) {
-            let activeElem = paretnColor.querySelector('.color_active');
+        let activeElem = paretnColor.querySelector('.color_active');
+        if (activeElem) {
             activeElem.classList.remove('color_active');
-
-            this.classList.add('color_active');
         }
 
-        return false;  
+        this.classList.add('color_active');
+
+        const textBlock = this.closest('.book');
+
+        if (textBlock.className.includes('book_color')) {
+            textBlock.classList.remove('book_color-gray');
+            textBlock.classList.remove('book_color-whitesmoke');
+            textBlock.classList.remove('book_color-black');
+        }
+        
+        if (this.getAttribute('data-text-color') === 'black') {
+            textBlock.classList.add('book_color-black');
+        }
+
+        if (this.getAttribute('data-text-color') === 'gray') {
+            textBlock.classList.add('book_color-gray');
+        }
+
+        if (this.getAttribute('data-text-color') === 'whitesmoke') {
+            textBlock.classList.add('book_color-whitesmoke');
+        }
+
+        return false;
     }
 }
 
@@ -120,11 +138,31 @@ const backgroundList = Array.from(paretnBackground.querySelectorAll('a.color'));
 
 function changeBackground(elem) {
     elem.onclick = function() {
-        if (!this.classList.contains('color_active')) {
-            let activeElem = paretnBackground.querySelector('.color_active');
+        let activeElem = paretnBackground.querySelector('.color_active');
+        if (activeElem) {
             activeElem.classList.remove('color_active');
+        }
 
-            this.classList.add('color_active');
+        this.classList.add('color_active');
+
+        const textBlock = this.closest('.book');
+
+        if (textBlock.className.includes('book_bg')) {
+            textBlock.classList.remove('book_bg-gray');
+            textBlock.classList.remove('book_bg-black');
+            textBlock.classList.remove('book_bg-white');
+        }
+        
+        if (this.getAttribute('data-bg-color') === 'black') {
+            textBlock.classList.add('book_bg-black');
+        }
+
+        if (this.getAttribute('data-bg-color') === 'gray') {
+            textBlock.classList.add('book_bg-gray');
+        }
+
+        if (this.getAttribute('data-bg-color') === 'white') {
+            textBlock.classList.add('book_bg-white');
         }
 
         return false;  
