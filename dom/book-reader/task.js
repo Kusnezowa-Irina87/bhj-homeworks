@@ -1,172 +1,90 @@
-const fontSizeList = Array.from(document.querySelectorAll('a.font-size'));
+const paretnFont = document.querySelector("div.book__control_font-size");
+const fontSizeList = Array.from(paretnFont.querySelectorAll('a.font-size'));
 
-// Вариант решения 1
-
-/* function changeFontSize(elem) {
-    elem.onclick = function() {
-        if (!this.classList.contains('font-size_active')) {
-            let activeElem = document.querySelector('.font-size_active');
-            activeElem.classList.remove('font-size_active');
-
-            this.classList.add('font-size_active');  
-        }
-
-        const textBlock = this.closest('.book');
-
-        if (textBlock.className !== 'book') {
-            textBlock.classList.remove('book_fs-big');
-            textBlock.classList.remove('book_fs-small');
-        }
-        
-        if (this.getAttribute('data-size') === 'small') {
-            textBlock.classList.add('book_fs-small');
-        }
-
-        if (this.getAttribute('data-size') === 'big') {
-            textBlock.classList.add('book_fs-big');
-        }
-
-        return false;
+function changeElem(obj, parent, classActive, parentClass, arrClass, dataAttr, arrValueAttr) {
+    let activeElem = parent.querySelector('.' + classActive);
+    if (activeElem) {
+        activeElem.classList.remove(classActive);
     }
-} */
 
-// Вариант решения 2
+    obj.classList.add(classActive);
 
-/* function changeFontSize(elem) {
-    elem.onclick = function() {
-        let activeElem = document.querySelector('.font-size_active');
+    const textBlock = obj.closest('.book');
+
+    if (textBlock.className.includes(parentClass)) {
+        textBlock.classList.remove(arrClass[0]);
+        textBlock.classList.remove(arrClass[1]);
+        textBlock.classList.remove(arrClass[2]);
+    }
     
-        if (activeElem) {
-            activeElem.classList.remove('font-size_active');
-        }
-
-        this.classList.add('font-size_active');
-
-        const textBlock = this.closest('.book');
-
-        if (textBlock.className.includes('book_fs')) {
-            textBlock.classList.remove('book_fs-big');
-            textBlock.classList.remove('book_fs-small');
-        }
-        
-        if (this.getAttribute('data-size') === 'small') {
-            textBlock.classList.add('book_fs-small');
-        }
-
-        if (this.getAttribute('data-size') === 'big') {
-            textBlock.classList.add('book_fs-big');
-        }
-
-        return false;
+    if (obj.getAttribute(dataAttr) === arrValueAttr[0]) {
+        textBlock.classList.add(arrClass[0]);
     }
-} */
-
-// Вариант решения 3 с addEventListener
+    if (obj.getAttribute(dataAttr) === arrValueAttr[1]) {
+        textBlock.classList.add(arrClass[1]);
+    }
+    if (obj.getAttribute(dataAttr) === arrValueAttr[2]) {
+        textBlock.classList.add(arrClass[2]);
+    }
+}
 
 function changeFontSize(elem) {
-    elem.addEventListener('click', function() {
-        let activeElem = document.querySelector('.font-size_active');
-    
-        if (activeElem) {
-            activeElem.classList.remove('font-size_active');
-        }
+    elem.addEventListener('click', function(event) {
+        let parent = paretnFont;
+        let classActive = 'font-size_active';
+        let parentClass = 'book_fs';
+        let arrClass = ['book_fs-big', 'book_fs-small', ''];
+        let dataAttr = 'data-size';
+        arrValueAttr = ['big', 'small', ''];
+        let obj = this;
 
-        elem.classList.add('font-size_active');
+        changeElem(obj, parent, classActive, parentClass, arrClass, dataAttr, arrValueAttr);
 
-        const textBlock = this.closest('.book');
-
-        if (textBlock.className !== "book") {
-            textBlock.classList.remove('book_fs-big');
-            textBlock.classList.remove('book_fs-small');
-        }
-        
-        if (this.getAttribute("data-size") === "small") {
-            textBlock.classList.add('book_fs-small');
-        }
-
-        if (this.getAttribute("data-size") === "big") {
-            textBlock.classList.add('book_fs-big');
-        }
-
-        elem.preventDefault();
-        //не работает с preventDefault(), идет перезагрузка страницы
+        event.preventDefault();
     });
 }
 
 fontSizeList.forEach(changeFontSize);
 
-const paretnColor = document.querySelector("div.book__control_color");
-const colorElemList = Array.from(paretnColor.querySelectorAll('a.color'));
+const parentColor = document.querySelector("div.book__control_color");
+const colorElemList = Array.from(parentColor.querySelectorAll('a.color'));
 
 function changeColor(elem) {
-    elem.onclick = function() {
-        let activeElem = paretnColor.querySelector('.color_active');
-        if (activeElem) {
-            activeElem.classList.remove('color_active');
-        }
+    elem.addEventListener('click', function(event) {
+        let parent = parentColor;
+        let classActive = 'color_active';
+        let parentClass = 'book_color';
+        let arrClass = ['book_color-gray', 'book_color-whitesmoke', 'book_color-black'];
+        let dataAttr = 'data-text-color';
+        arrValueAttr = ['gray', 'whitesmoke', 'black'];
+        let obj = this;
 
-        this.classList.add('color_active');
+        changeElem(obj, parent, classActive, parentClass, arrClass, dataAttr, arrValueAttr);
 
-        const textBlock = this.closest('.book');
-
-        if (textBlock.className.includes('book_color')) {
-            textBlock.classList.remove('book_color-gray');
-            textBlock.classList.remove('book_color-whitesmoke');
-            textBlock.classList.remove('book_color-black');
-        }
-        
-        if (this.getAttribute('data-text-color') === 'black') {
-            textBlock.classList.add('book_color-black');
-        }
-
-        if (this.getAttribute('data-text-color') === 'gray') {
-            textBlock.classList.add('book_color-gray');
-        }
-
-        if (this.getAttribute('data-text-color') === 'whitesmoke') {
-            textBlock.classList.add('book_color-whitesmoke');
-        }
-
-        return false;
-    }
+        event.preventDefault();
+    });
 }
 
 colorElemList.forEach(changeColor);
 
-const paretnBackground = document.querySelector("div.book__control_background");
-const backgroundList = Array.from(paretnBackground.querySelectorAll('a.color'));
+const parentBackground = document.querySelector("div.book__control_background");
+const backgroundList = Array.from(parentBackground.querySelectorAll('a.color'));
+
 
 function changeBackground(elem) {
-    elem.onclick = function() {
-        let activeElem = paretnBackground.querySelector('.color_active');
-        if (activeElem) {
-            activeElem.classList.remove('color_active');
-        }
+    elem.addEventListener('click', function(event) {
+        let parent = parentBackground;
+        let classActive = 'color_active';
+        let parentClass = 'book_bg';
+        let arrClass = ['book_bg-gray', 'book_bg-black', 'book_bg-white'];
+        let dataAttr = 'data-bg-color';
+        arrValueAttr = ['gray', 'black', 'white'];
+        let obj = this;
 
-        this.classList.add('color_active');
+        changeElem(obj, parent, classActive, parentClass, arrClass, dataAttr, arrValueAttr);
 
-        const textBlock = this.closest('.book');
-
-        if (textBlock.className.includes('book_bg')) {
-            textBlock.classList.remove('book_bg-gray');
-            textBlock.classList.remove('book_bg-black');
-            textBlock.classList.remove('book_bg-white');
-        }
-        
-        if (this.getAttribute('data-bg-color') === 'black') {
-            textBlock.classList.add('book_bg-black');
-        }
-
-        if (this.getAttribute('data-bg-color') === 'gray') {
-            textBlock.classList.add('book_bg-gray');
-        }
-
-        if (this.getAttribute('data-bg-color') === 'white') {
-            textBlock.classList.add('book_bg-white');
-        }
-
-        return false;  
-    }
+        event.preventDefault();
+    });
 }
 
 backgroundList.forEach(changeBackground);
