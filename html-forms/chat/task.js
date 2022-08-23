@@ -59,20 +59,36 @@ function getWord() {
 }
 // getWord взяла из ДЗ keysolo
 
+function changeHtml(timeStr, text) {
+  messages.innerHTML += `
+    <div class="message">
+      <div class="message__time">` + timeStr + `</div>
+      <div class="message__text">` + text + `</div>
+    </div>
+  `;
+
+  messagesContainer.scrollIntoView({block: "end", behavior: "smooth"});
+}
+
 function addRobotQuestion() {
   let time = new Date();
   let timeStr = time.toLocaleTimeString();
   timeStr = timeStr.substring(0, 5);
 
   let textRobot = getQuestion();
-  messages.innerHTML += `
+
+  changeHtml(timeStr, textRobot);
+
+  /* messages.innerHTML += `
     <div class="message">
       <div class="message__time">` + timeStr + `</div>
       <div class="message__text">` + textRobot + `</div>
     </div>
-  `;
+  `; */
 
-  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  // messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  //готовое рещение для прокрутки скролла до видимой области пользователя
+  // messagesContainer.scrollIntoView({block: "end", behavior: "smooth"});
 }
 
 function addRobotMessage() {
@@ -81,14 +97,17 @@ function addRobotMessage() {
   timeStr = timeStr.substring(0, 5);
 
   let textRobot = getWord();
-  messages.innerHTML += `
+
+  changeHtml(timeStr, textRobot);
+
+  /* messages.innerHTML += `
     <div class="message">
       <div class="message__time">` + timeStr + `</div>
       <div class="message__text">` + textRobot + `</div>
     </div>
-  `;
+  `; */
 
-  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  // messagesContainer.scrollIntoView({block: "end", behavior: "smooth"});
 }
 
 function addClientMessage(obj) {
@@ -97,14 +116,16 @@ function addClientMessage(obj) {
   let timeStr = time.toLocaleTimeString();
   timeStr = timeStr.substring(0, 5);
 
-  messages.innerHTML += `
+  changeHtml(timeStr, text);
+
+  /* messages.innerHTML += `
     <div class="message message_client">
       <div class="message__time">` + timeStr + `</div>
       <div class="message__text">` + text + `</div>
     </div>
-  `;
+  `; */
 
-  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  // messagesContainer.scrollIntoView({block: "end", behavior: "smooth"});
 }
 
 input.addEventListener("keyup", function(e) {
