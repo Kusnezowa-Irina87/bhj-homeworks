@@ -20,12 +20,10 @@ class Game {
     let arr = (timer.textContent).split(':');
     
     if (Number(arr[2]) === 0) {
-      this.clearInterval();
       if (this.currentSymbol === null) {
         alert('всё введено');
         this.success();
       } else {
-        this.clearInterval();
         alert('Не успели ввести слово');
         //в этом месте alert постоянно повторяется
         this.fail();
@@ -38,11 +36,12 @@ class Game {
       }
 
       timer.textContent = arr.join(':');
+      console.log(timer.textContent);
     }
   }
 
   setInterval() {
-    let intervalId = setInterval(this.addTimer, 1000);
+    let intervalId = setInterval(() => this.addTimer(), 1000);
     return intervalId;
   }
 
@@ -59,8 +58,6 @@ class Game {
       timer.textContent = "00:00:0" + numberSymbols;
     }
 
-    this.setInterval();
-
     document.onkeydown = (e) => {
       let symbol = this.currentSymbol.textContent.toUpperCase();
       let key = String.fromCharCode(e.keyCode);
@@ -69,11 +66,8 @@ class Game {
         this.currentSymbol.classList.remove('symbol_current');
         this.success();
         this.currentSymbol.classList.add('symbol_current');
-        this.setInterval();
       } else {
-        this.clearInterval();
         this.fail();
-        this.setInterval();
       }
     }
   }
@@ -86,7 +80,6 @@ class Game {
     }
 
     if (++this.winsElement.textContent === 10) {
-      this.clearInterval();
       alert('Победа!');
       this.reset();
     }
@@ -102,9 +95,13 @@ class Game {
   }
 
   setNewWord() {
+    this.clearInterval();
+
     const word = this.getWord();
 
     this.renderWord(word);
+
+    this.setInterval();
   }
 
   getWord() {
@@ -136,7 +133,6 @@ class Game {
     this.wordElement.innerHTML = html;
 
     this.currentSymbol = this.wordElement.querySelector('.symbol_current');
-    this.setInterval();
   }
 }
 
